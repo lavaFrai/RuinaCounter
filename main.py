@@ -98,10 +98,10 @@ def update_by_timer():
     while True:
         get_data()
         print("Data updated")
-        time.sleep(30*60 + random.randint(0, 100))
+        time.sleep(45*60 + random.randint(0, 100))
 
 
-@cachetools.func.ttl_cache(maxsize=128, ttl=60)
+@cachetools.func.ttl_cache(maxsize=128, ttl=60*20)
 def get_data():
     print("Data updated2")
     data = get_stored_data()

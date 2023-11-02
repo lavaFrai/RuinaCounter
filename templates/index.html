@@ -14,7 +14,7 @@
         {% if online %}
         <h3 class="text-center pt-5">🔴 Стрим онлайн!</h3>
         {% endif %}
-        <h1 class="text-center pt-3"><span id="current-timer">{{current}}</span> дней без стримов <a href="https://www.youtube.com/@ZakvielChannel">Заквиеля</a></h1>
+        <h1 class="text-center pt-3"><span id="current-timer">{{current}}</span> {% if timescale_hours %}часов{% else %}дней{% endif %} без стримов <a href="https://www.youtube.com/@ZakvielChannel">Заквиеля</a></h1>
         <p class="text-center pt-2 fw-light fst-italic font-monospace text-body-secondary">Рекорд - <span id="maximal-timer">{{highscore}}</span> дней.<p>
         <div></div>
 
