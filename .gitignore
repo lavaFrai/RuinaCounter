@@ -2,3 +2,7 @@ data.json
 .idea
 client_secret.json
 secret.json
+pyvenv.cfg
+Include/
+Lib/
+Scripts/

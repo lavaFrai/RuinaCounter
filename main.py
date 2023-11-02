@@ -3,6 +3,7 @@ import os.path
 import random
 import time
 from datetime import datetime, timedelta
+import sys
 
 import cachetools.func
 from threading import Thread
@@ -24,6 +25,10 @@ app = Flask(__name__)
 
 
 def is_online():
+    #--- !DEBUG feature! ---
+    if '--no-api' in sys.argv:   return True
+    #-----------------------
+
     scopes = ["https://www.googleapis.com/auth/youtube"]
     channel = "https://www.youtube.com/@ZakvielChannel"
 
@@ -136,4 +141,8 @@ if __name__ == '__main__':
     t.daemon = True
     t.start()
 
-    app.run(host='0.0.0.0', port=80)
+    if not ('--debug' in sys.argv):
+        app.run(host='0.0.0.0', port=80)
+    else:
+        app.run(host='0.0.0.0', port=80)
+
