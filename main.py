@@ -10,14 +10,61 @@ from threading import Thread
 import requests
 from flask import Flask, render_template, send_from_directory
 
+import google_auth_oauthlib.flow
+import googleapiclient.discovery
+import googleapiclient.errors
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from googleapiclient.http import MediaFileUpload
+
 app = Flask(__name__)
 
 
 def is_online():
-    channel = "https://www.youtube.com/@ZakvielChannel/streams"
-    request = requests.get(channel,
-                           headers={'Accept-Language': 'en-US'})
-    return '"label":"LIVE"' in request.text
+    scopes = ["https://www.googleapis.com/auth/youtube"]
+    channel = "https://www.youtube.com/@ZakvielChannel"
+
+    credentials = None
+    if os.path.exists('secret.json'):
+        print("Loading credentials from token")
+        credentials = Credentials.from_authorized_user_file('secret.json', scopes)
+
+    if not credentials or not credentials.valid:
+        if credentials and credentials.expired and credentials.refresh_token:
+            print(f"refresh token")
+            credentials.refresh(Request())
+        else:
+            print(f"asking for token")
+            flow = InstalledAppFlow.from_client_secrets_file('client_secret.json', scopes)
+            credentials = flow.run_local_server(port=0)
+
+        print(f"writing token file")
+        with open('secret.json', 'w') as token_file:
+            token_file.write(credentials.to_json())
+
+    youtube = googleapiclient.discovery.build("youtube", 'v3', credentials=credentials)
+
+    request = youtube.channels().list(
+        part="snippet,contentDetails,statistics",
+        # channelId="UC8PH_guEODbrSfcBYnC_WGQ",
+        forUsername="ZakvielChannel",
+        maxResults=25
+    )
+    _id = response = request.execute()['items'][0]['id']
+    print("Id:", _id)
+
+    request = youtube.search().list(
+        part="snippet",
+        channelId="UC8PH_guEODbrSfcBYnC_WGQ",
+        maxResults=25
+    )
+    response = request.execute()['items']
+    response = list(filter(lambda x: x['id']['kind'] == "youtube#channel", response))[0]
+
+    return response['snippet']['liveBroadcastContent'] == 'live'
 
 
 def get_stored_data():
