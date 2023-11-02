@@ -2,7 +2,7 @@ import json
 import os.path
 import random
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import cachetools.func
 from threading import Thread
@@ -62,8 +62,27 @@ def is_online():
         maxResults=25
     )
     response = request.execute()['items']
-    response = list(filter(lambda x: x['id']['kind'] == "youtube#channel", response))[0]
+    response = list(filter(lambda x: x['id']['kind'] == "youtube#channel", response))
 
+    while len(response) < 1:
+        request = youtube.channels().list(
+            part="snippet,contentDetails,statistics",
+            # channelId="UC8PH_guEODbrSfcBYnC_WGQ",
+            forUsername="ZakvielChannel",
+            maxResults=25
+        )
+        _id = response = request.execute()['items'][0]['id']
+        print("Id:", _id)
+
+        request = youtube.search().list(
+            part="snippet",
+            channelId="UC8PH_guEODbrSfcBYnC_WGQ",
+            maxResults=25
+        )
+        response = request.execute()['items']
+        response = list(filter(lambda x: x['id']['kind'] == "youtube#channel", response))
+
+    response = response[0]
     return response['snippet']['liveBroadcastContent'] == 'live'
 
 
@@ -103,7 +122,8 @@ def hello():
     data = get_data()
     return render_template('index.html',
                            current=(datetime.now() - datetime.fromtimestamp(data['lastonline'])).days,
-                           highscore=data['highscore'])
+                           highscore=data['highscore'],
+                           online=(datetime.now() - datetime.fromtimestamp(data['lastonline'])) < timedelta(minutes=10))
 
 
 @app.route('/<path:path>')

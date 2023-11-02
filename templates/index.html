@@ -11,14 +11,18 @@
 </head>
 <body data-bs-theme="dark" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh;">
     <div>
-        <h1 class="text-center pt-5"><span id="current-timer">{{current}}</span> дней без стримов <a href="https://www.youtube.com/@ZakvielChannel">Заквиеля</a></h1>
+        {% if online %}
+        <h3 class="text-center pt-5">🔴 Стрим онлайн!</h3>
+        {% endif %}
+        <h1 class="text-center pt-3"><span id="current-timer">{{current}}</span> дней без стримов <a href="https://www.youtube.com/@ZakvielChannel">Заквиеля</a></h1>
         <p class="text-center pt-2 fw-light fst-italic font-monospace text-body-secondary">Рекорд - <span id="maximal-timer">{{highscore}}</span> дней.<p>
+        <div></div>
 
         <div class="d-flex justify-content-evenly wrap-mobile align-self-center ">
             <div class="card mt-5 mx-auto" style="width: 18rem;">
                 <img src="media/ruina1.png" class="card-img-top" alt="Ada">
                 <div class="card-body">
-                    <p class="card-text">Мои поздравления! Вы успешно продержались столько дней без стримов от нашего любимого стримера. Кажется, вы достигли нового рекорда по выдержке! Скажите спасибо что стример заботится о вас не давая вам смотреть стримы круглосуточно!</p>
+                    <p class="card-text">Мои поздравления! Вы успешно продержались столько дней без стримов от нашего любимого руины. Кажется, вы достигли нового рекорда по выдержке! Скажите спасибо что стример заботится о вас не давая вам смотреть стримы круглосуточно!</p>
                 </div>
             </div>
 
@@ -40,19 +44,19 @@
 
     <div>
         <footer class="bg-dark text-center "  style="background-color: rgba(0, 0, 0, 0.2)">
-            <div class="container p-4">
+            <div class="container p-3">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <a href="https://github.com/lavafrai">GitHub</a>
+                    <a href="https://github.com/lavaFrai/ruinacounter">GitHub</a>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <a href="https://www.donationalerts.com/r/lavafrai">DonationAlerts</a>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <a href="mailto:lavafrai@yandex.ru">E-mail</a>
+                    <a href="https://discord.com/users/677933625802489889/">Discord</a>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <a href="https://discord.com/users/677933625802489889/">Discord</a>
+                    <a href="https://discord.gg/wQE23SCPfv">Discord server</a>
                     </div>
                 </div>
             </div>
