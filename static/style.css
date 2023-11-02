@@ -1,0 +1,15 @@
+@media only screen and (max-width: 1000px) {
+    .wrap-mobile {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+footer {
+    width: 100%;
+    color:#fff;
+
+    position:sticky;
+    top:100vh;
+  }
