@@ -14,7 +14,8 @@ app = Flask(__name__)
 
 
 def is_online():
-    request = requests.get("https://www.youtube.com/@ZakvielChannel/streams")
+    request = requests.get("https://www.youtube.com/@ZakvielChannel/streams",
+                           headers={'Accept-Language': 'ru-RU'})
     return "В ЭФИРЕ" in request.text
 
 
@@ -62,9 +63,15 @@ def send_static(path):
     return send_from_directory('static', path)
 
 
+
+print(is_online())
+"""
 if __name__ == '__main__':
     t = Thread(target=update_by_timer)
     t.daemon = True
     t.start()
 
     app.run(host='0.0.0.0', port=80)
+
+
+"""
