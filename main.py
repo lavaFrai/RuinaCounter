@@ -21,7 +21,7 @@ def is_online():
 def get_stored_data():
     if not os.path.exists('data.json'):
         with open('data.json', 'w') as f:
-            f.write('{"last": 0, "highscore": 0}')
+            f.write('{"lastonline": 0, "highscore": 0}')
     with open('data.json', 'r') as f:
         return json.loads(f.read())
 
