@@ -120,10 +120,13 @@ def get_data():
 @app.route('/')
 def hello():
     data = get_data()
+    delta = (datetime.now() - datetime.fromtimestamp(data['lastonline']))
+
     return render_template('index.html',
-                           current=(datetime.now() - datetime.fromtimestamp(data['lastonline'])).days,
+                           current=delta.days if delta > timedelta(days=1) else delta.seconds // 3600,
                            highscore=data['highscore'],
-                           online=(datetime.now() - datetime.fromtimestamp(data['lastonline'])) < timedelta(minutes=30))
+                           timescale_hours=delta < timedelta(days=1),
+                           online=delta < timedelta(minutes=30))
 
 
 @app.route('/<path:path>')
