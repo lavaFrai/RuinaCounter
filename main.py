@@ -123,7 +123,7 @@ def hello():
     return render_template('index.html',
                            current=(datetime.now() - datetime.fromtimestamp(data['lastonline'])).days,
                            highscore=data['highscore'],
-                           online=(datetime.now() - datetime.fromtimestamp(data['lastonline'])) < timedelta(minutes=10))
+                           online=(datetime.now() - datetime.fromtimestamp(data['lastonline'])) < timedelta(minutes=30))
 
 
 @app.route('/<path:path>')
