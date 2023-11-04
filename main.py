@@ -7,20 +7,19 @@ from datetime import datetime, timedelta
 import cachetools.func
 from threading import Thread
 
-import requests
 from flask import Flask, render_template, send_from_directory
 
-import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-from googleapiclient.http import MediaFileUpload
 
 app = Flask(__name__)
+
+global visitors, last_visitor
+visitors = 0
+last_visitor = 0
 
 
 def is_online():
@@ -119,6 +118,13 @@ def get_data():
 @app.route('/index.htm')
 @app.route('/')
 def hello():
+    global visitors, last_visitor
+
+    if datetime.fromtimestamp(last_visitor).day != datetime.now().day:
+        visitors = 0
+    visitors += 1
+    last_visitor = datetime.now().timestamp()
+
     data = get_data()
     delta = (datetime.now() - datetime.fromtimestamp(data['lastonline']))
 
@@ -126,7 +132,8 @@ def hello():
                            current=delta.days if delta > timedelta(days=1) else delta.seconds // 3600,
                            highscore=data['highscore'],
                            timescale_hours=delta < timedelta(days=1),
-                           online=delta < timedelta(minutes=30))
+                           online=delta < timedelta(minutes=30),
+                           visitors=visitors)
 
 
 @app.route('/<path:path>')
