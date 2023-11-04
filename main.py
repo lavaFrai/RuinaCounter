@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import cachetools.func
 from threading import Thread
 
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 
 import googleapiclient.discovery
 import googleapiclient.errors
@@ -17,9 +17,10 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 app = Flask(__name__)
 
-global visitors, last_visitor
+global visitors, last_visitor, visitors_list
 visitors = 0
 last_visitor = 0
+visitors_list = []
 
 
 def is_online():
@@ -118,12 +119,17 @@ def get_data():
 @app.route('/index.htm')
 @app.route('/')
 def hello():
-    global visitors, last_visitor
+    global visitors, last_visitor, visitors_list
+    user_id = f"{request.remote_addr}:{request.headers.get('User-Agent')}:{request.headers.get('X-Real-IP')}"
 
     if datetime.fromtimestamp(last_visitor).day != datetime.now().day:
         visitors = 0
-    visitors += 1
+        visitors_list = []
+    if user_id not in visitors_list:
+        visitors += 1
+        visitors_list.append(user_id)
     last_visitor = datetime.now().timestamp()
+    print(visitors_list)
 
     data = get_data()
     delta = (datetime.now() - datetime.fromtimestamp(data['lastonline']))
