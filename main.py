@@ -53,7 +53,7 @@ def is_online():
         forUsername="ZakvielChannel",
         maxResults=25
     )
-    _id = response = request.execute()['items'][0]['id']
+    _id = request.execute()['items'][0]['id']
     print("Id:", _id)
 
     request = youtube.search().list(
