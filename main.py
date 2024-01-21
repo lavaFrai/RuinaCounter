@@ -23,7 +23,12 @@ def is_online():
     channel_id = '44407373'
     response = False
 
-    res = requests.get(api_link+'helix/streams?user_id='+channel_id, headers={'Authorization': 'Bearer '+os.environ("token"), 'Client-Id': str(os.environ("client"))}).text
+    secret = None
+    if os.path.exists('secret.json'):
+        print("Loading credentials from token")
+        secret = json.load(open("secret.json", 'r'))
+
+    res = requests.get(api_link+'helix/streams?user_id='+channel_id, headers={'Authorization': 'Bearer '+secret["token"], 'Client-Id': str(secret["client_id"])}).text
     if res != '{"data":[],"pagination":{}}':
         response = True
 
