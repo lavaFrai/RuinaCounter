@@ -29,6 +29,7 @@ def is_online():
         secret = json.load(open("secret.json", 'r'))
 
     res = json.loads(requests.get(api_link+'helix/streams?user_id='+channel_id, headers={'Authorization': 'Bearer '+secret["token"], 'Client-Id': str(secret["client_id"])}).text)
+    print(res)
     return len(res["data"]) > 0
 
 
