@@ -57,7 +57,11 @@ def get_data():
 
     data['highscore'] = max((datetime.now() - datetime.fromtimestamp(data['lastonline'])).days, data['highscore'])
     if is_online():
+        print("online")
         data['lastonline'] = datetime.now().timestamp()
+    else:
+        print("offline")
+
 
     with open('data.json', 'w') as f:
         f.write(json.dumps(data))
