@@ -20,7 +20,7 @@ visitors_list = []
 
 def is_online():
     api_link = 'https://api.twitch.tv/'
-    channel_id = '44407373'
+    channel_id = '44407373' # '44407373'
     response = False
 
     secret = None
@@ -28,11 +28,8 @@ def is_online():
         print("Loading credentials from token")
         secret = json.load(open("secret.json", 'r'))
 
-    res = requests.get(api_link+'helix/streams?user_id='+channel_id, headers={'Authorization': 'Bearer '+secret["token"], 'Client-Id': str(secret["client_id"])}).text
-    if res != '{"data":[],"pagination":{}}':
-        response = True
-
-    return response
+    res = json.loads(requests.get(api_link+'helix/streams?user_id='+channel_id, headers={'Authorization': 'Bearer '+secret["token"], 'Client-Id': str(secret["client_id"])}).text)
+    return len(res["data"]) > 0
 
 
 def get_stored_data():
@@ -50,7 +47,7 @@ def update_by_timer():
         time.sleep(45*60 + random.randint(0, 100))
 
 
-@cachetools.func.ttl_cache(maxsize=128, ttl=60*20)
+# @cachetools.func.ttl_cache(maxsize=128, ttl=60*20)
 def get_data():
     print("Data updated2")
     data = get_stored_data()
@@ -61,7 +58,6 @@ def get_data():
         data['lastonline'] = datetime.now().timestamp()
     else:
         print("offline")
-
 
     with open('data.json', 'w') as f:
         f.write(json.dumps(data))
@@ -104,4 +100,4 @@ if __name__ == '__main__':
     t.daemon = True
     t.start()
 
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=8555, debug=True)
