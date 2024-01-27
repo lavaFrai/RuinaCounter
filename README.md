@@ -1,4 +1,4 @@
- <a href="https://ruina-counter.ru/"><p align="center"> <img src="https://github.com/ArtemBay/RuinaCounter/assets/31122393/e2642d8d-1474-47ec-ac1e-6376d5dff4b8"></p></a>
+ <a href="https://ruina-counter.ru/"><p align="center"> <img src="https://github.com/lavaFrai/RuinaCounter/blob/master/static/media/ruina-banner.png?raw=true"></p></a>
 
 # Для чего это нужно?
 Ну для того чтобы забуллить в очередной раз своего любимого стримера котоырй оффлайнит по 77 дней подряд
