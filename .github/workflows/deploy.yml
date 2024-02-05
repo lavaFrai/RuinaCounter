@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    name: Update server via ssh
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect and run script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER_LOGIN }}
+          password: ${{ secrets.SERVER_USER_PASSWORD }}
+          script_stop: true
+          script: bash ${{ secrets.SERVER_SCRIPT }}.sh
