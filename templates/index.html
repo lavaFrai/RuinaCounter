@@ -1,88 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Ruina Counter by. lava_frai</title>
-    <link rel="icon" href="media/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Ruina counter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/media/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ruina-counter.ru/"/>
-    <meta property="og:description" content="С помощью нашего сайта ты можешь легко узнать, сколько времени прошло с момента последнего стрима нашего руины">
+    <meta property="og:description"
+          content="С помощью нашего сайта ты можешь легко узнать, сколько времени прошло с момента последнего стрима нашего руины">
     <meta property="og:site_name" content="Руина-Каунтер.ру">
     <meta property="og:title" content="Ruina counter by. lava_frai"/>
     <meta property="og:image" content="media/ruina-banner.png">
     <meta name="theme-color" content="#6EA8FE">
     <meta name="description" content="Руина-Каунтер.ру">
-    <meta name="keywords" content="ruina-counter, ruina, ruinacounter, zakviel, руина-каунтер, руина, руинакаунтер, закивель">
+    <meta name="keywords"
+          content="ruina-counter, ruina, ruinacounter, zakviel, руина-каунтер, руина, руинакаунтер, закивель">
     <meta property="og:type" content="website">
-
-
 </head>
-<body data-bs-theme="dark" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh;">
-    <div>
-        {% if online %}
-        <h3 class="text-center pt-5">🔴 Стрим онлайн!</h3>
-        {% endif %}
-        <h1 class="text-center pt-3"><span id="current-timer">{{current}}</span> {% if timescale_hours %}часов{% else %}дней{% endif %} без стримов <a href="https://www.youtube.com/@ZakvielChannel">Заквиеля</a></h1>
-        <p class="text-center pt-2 fw-light fst-italic font-monospace text-body-secondary">Рекорд - <span id="maximal-timer">{{highscore}}</span> дней.<p>
-        <div></div>
-
-        <div class="d-flex justify-content-evenly wrap-mobile align-self-center ">
-            <div class="card mt-5 mx-auto" style="width: 18rem;">
-                <img src="media/ruina1.png" class="card-img-top" alt="Ada">
-                <div class="card-body">
-                    <p class="card-text">Мои поздравления! Вы успешно продержались столько дней без стримов от нашего любимого руины. Кажется, вы достигли нового рекорда по выдержке! Скажите спасибо что стример заботится о вас не давая вам смотреть стримы круглосуточно!</p>
-                </div>
-            </div>
-
-            <div class="card mt-5 mx-auto" style="width: 18rem;">
-                <div class="card-body">
-                    <p class="card-text">Надеемся, что ваши нервы не пострадали от отсутствия онлайн-развлечений. Но не волнуйтесь, наш бесстрашный стример скоро вернется в строй и подарит вам море эмоций и захватывающих моментов на его потоке.</p>
-                </div>
-                <img src="media/ruina2.png" class="card-img-bottom" alt="Ada">
-            </div>
-
-            <div class="card mt-5 mx-auto" style="width: 18rem;">
-                <img src="media/ruina3.png" class="card-img-top" alt="Ada">
-                <div class="card-body">
-                    <p class="card-text">Сохраняйте свою стойкость и заглядывайте на сайт каждый день, чтобы быть в курсе, когда же наш любимец вернется к вам с новыми стримами. А пока, можете наслаждаться реальной жизнью и трогать траву!</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div>
-        <footer class="bg-dark text-center" style="background-color: rgba(0, 0, 0, 0.2)">
-            <div class="container p-3">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <a href="https://github.com/lavaFrai/ruinacounter">GitHub</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <a href="https://www.donationalerts.com/r/lavafrai">DonationAlerts</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <a href="https://discord.gg/wQE23SCPfv">Discord server</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    Visitors today: {{ visitors }}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-                © 2023 Copyright: @lava_frai
-                <br>
-                with 🤍 by. lava_frai
-            </div>
-        </footer>
-    </div>
-
+<body>
+<header>
+    {% if online %}
+        <h1>🔴 <a href="https://www.youtube.com/@ZakvielChannel" target="_blank">Заквиель</a> сейчас стримит</h1>
+    {% else %}
+        <h1>{{ current }} дней без стримов <a href="https://www.youtube.com/@ZakvielChannel"
+                                              target="_blank">Заквиеля</a></h1>
+    {% endif %}
+    <p class="text-1">Рекорд - {{ highscore }} дней</p>
+</header>
+<main>
+    <section>
+        <ul class="list">
+            <li>
+                <img src="/media/ruina1.png">
+                <p>Мои поздравления! Вы успешно продержались столько дней без стримов от нашего любимого руины. Кажется,
+                    вы достигли нового рекорда по выдержке! Скажите спасибо что стример заботится о вас не давая вам
+                    смотреть стримы круглосуточно!
+                </p>
+            </li>
+            <li>
+                <img src="/media/ruina2.png">
+                <p>Надеемся, что ваши нервы не пострадали от отсутствия онлайн-развлечений. Но не волнуйтесь, наш
+                    бесстрашный стример скоро вернется в строй и подарит вам море эмоций и захватывающих моментов на его
+                    потоке.</p>
+            </li>
+            <li>
+                <img src="/media/ruina3.png">
+                <p>Сохраняйте свою стойкость и заглядывайте на сайт каждый день, чтобы быть в курсе, когда же наш
+                    любимец вернется к вам с новыми стримами. А пока, можете наслаждаться реальной жизнью и трогать
+                    траву!</p>
+            </li>
+        </ul>
+    </section>
+</main>
+<footer>
+    <ul>
+        <li><p><a href="https://pay.cloudtips.ru/p/e930707c" target="_blank" rel="noopener noreferrer">Donations</a></p>
+        </li>
+        <li><p><a href="https://discord.com/invite/wQE23SCPfv" target="_blank">Discord</a></p></li>
+        <li><p>Made with 🤍 by <a href="https://artembay.ru" target="_blank">ArtemBay</a> and <a href="https://lavafrai.ru" target="_blank">lava_frai</a> </p></li>
+        <li><p><a href="https://github.com/lavaFrai/RuinaCounter" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </p></li>
+        <li><p>Visitors today: {{ visitors }}</p></li>
+    </ul>
+</footer>
 </body>
 </html>

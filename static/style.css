@@ -1,15 +1,140 @@
-@media only screen and (max-width: 1000px) {
-    .wrap-mobile {
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-    }
+/* by N.K https://devo4ka.top/ */
+
+:root {
+  --color-text: #FFF;
+  --color-card: #AAAAAA18;
+  --color-bg: #1D1C1C;
+}
+
+body {
+  background-color: var(--color-bg);
+  background-image: url(/media/bg.png);
+  font-family: Montserrat;
+  color: var(--color-text); 
+  text-align: center;
+  font-style: normal;
+  line-height: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration-line: underline;
+  color: var(--color-text);
+}
+
+.list {
+  display: flex;
+  gap: 114px;
+  list-style: none;
+  justify-content: center;
+}
+
+.list > li {
+  display: block;
+  background-color: var(--color-card);
+  width: 20%;
+  border-radius: 15px;
+  backdrop-filter: blur(10 );
+  transition: all 0.5s;
+}
+
+.list > li > img {
+  border-radius: 15px;
+}
+
+.list > li > p {
+  font-size: 1.2em;
+  font-style: normal;
+  font-weight: 400;
+  text-align: justify;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: 700;
+  transition: all 0.5s;
+}
+
+h1 > span {
+  text-decoration-line: underline;
+}
+
+.text-1 {
+  font-size: 2em;
+  font-weight: 400;
 }
 
 footer {
-    width: 100%;
-    color:#fff;
+  position: sticky;
+  top: 100vh;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.5s;
+}
 
-    position:sticky;
-    top:100vh;
+footer > ul > li {
+  justify-content: center;
+  display: flex;
+  transition: all 0.5s;
+}
+
+footer > ul {
+  display: flex;
+  gap: 114px;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+@media (max-width:1245px)  { 
+
+  h1 {
+    font-size: 2em;
   }
+
+  footer > ul {
+    gap: 25px;
+  }
+
+  .list > li {
+    width: 30%;
+  }
+
+  .list {
+    gap: 25px;
+  }
+}
+
+@media (max-width:890px)  { 
+  footer > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .list {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .list > li {
+    width: 90%;
+  }
+}
+
+section ul li img {
+  width: 100%;
+}
+
+section ul li p {
+  padding: 0px 14px 56px 13px;
+}
+
